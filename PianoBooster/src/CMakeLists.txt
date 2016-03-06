@@ -202,11 +202,11 @@ IF(APPLE)
         ${PIANOBOOSTER_UI_HDRS})
 ENDIF(APPLE)
 
-IF(UNIX)
-    ADD_EXECUTABLE( pianobooster pianobooster.rc ${PIANOBOOSTER_SRCS}
-        ${PIANOBOOSTER_MOC_SRCS} ${PIANOBOOSTER_RC_SRCS}
-        ${PIANOBOOSTER_UI_HDRS} )
-ENDIF(UNIX)
+# IF(UNIX)
+#     ADD_EXECUTABLE( pianobooster pianobooster.rc ${PIANOBOOSTER_SRCS}
+#         ${PIANOBOOSTER_MOC_SRCS} ${PIANOBOOSTER_RC_SRCS}
+#         ${PIANOBOOSTER_UI_HDRS} )
+# ENDIF(UNIX)
 
 IF(WIN32)
     ADD_EXECUTABLE( pianobooster WIN32 pianobooster.rc ${PIANOBOOSTER_SRCS}
@@ -222,7 +222,7 @@ ENDIF (USE_PCH)
 
 
 INSTALL( FILES pianobooster.desktop DESTINATION share/applications )
-INSTALL(TARGETS pianobooster RUNTIME DESTINATION bin)
+INSTALL( TARGETS pianobooster BUNDLE DESTINATION bin )
 #INSTALL( index.docbook INSTALL_DESTINATION ${HTML_INSTALL_DIR}/en  SUBDIR kmidimon )
 
 INSTALL( FILES ../README.txt  DESTINATION share/pianobooster/doc/ )
