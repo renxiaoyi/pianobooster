@@ -26,6 +26,7 @@
 */
 /*********************************************************************************/
 
+#include <stdio.h>
 #include "Draw.h"
 #include "Cfg.h"
 #include "Settings.h"
@@ -253,6 +254,7 @@ void CDraw::drawNoteName(int midiNote, float x, float y, int type)
     }
 }
 
+
 void CDraw::drawStaveNoteName(CSymbol symbol, float x, float y)
 {
     if ( symbol.getNoteIndex() + 1 != symbol.getNoteTotal())
@@ -260,7 +262,16 @@ void CDraw::drawStaveNoteName(CSymbol symbol, float x, float y)
     if (m_settings->showNoteNames() == false)
         return;
     y += CStavePos::getVerticalNoteSpacing()*2 +3;
-    drawNoteName(symbol.getNote(), x, y, true);
+    int note = symbol.getNote();
+    drawNoteName(note, x, y, true);
+    
+    int key = CSong::midiNote2Key(note);
+    char buf[100];
+    if (key > 0)
+        sprintf(buf, "midi note [%d] => key [%c]", note, key);
+    else
+        sprintf(buf, "midi note [%d] => key [null]", note);
+    ppLogDebug(buf);
 }
 
 void CDraw::checkAccidental(CSymbol symbol, float x, float y)
@@ -696,7 +707,7 @@ void CDraw::drawSymbol(CSymbol symbol, float x)
 void CDraw::drawSlot(CSlot* slot)
 {
     CStavePos stavePos;
-    int av8Left = slot->getAv8Left();
+    //int av8Left = slot->getAv8Left();
     for (int i=0; i < slot->length(); i++)
     {
         stavePos.notePos(slot->getSymbol(i).getHand(), slot->getSymbol(i).getNote());

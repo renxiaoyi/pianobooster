@@ -89,6 +89,8 @@ public:
 
     QString getSongTitle() {return m_songTitle;}
 
+    static int midiNote2Key(int note);
+
 private:
     void midiFileInfo();
 

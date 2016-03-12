@@ -296,7 +296,7 @@ static const pcNote_s pcNoteLookup[] =
     { 'l', 73 },
     { ';', 74 }, // D
     { '\'', 75 },
-    { '\\', 76 }, // E
+    { '\r', 76 }, // E
     { 'v', 77 }, // F
     { 'b', 78 },
     { 'n', 79 }, // G
@@ -307,6 +307,14 @@ static const pcNote_s pcNoteLookup[] =
     
     { '~', PC_KEY_HIGHEST_NOTE },
 };
+
+int CSong::midiNote2Key(int note)
+{
+    for (size_t i = 0; i < arraySize(pcNoteLookup); i++)
+        if (note == pcNoteLookup[i].note)
+            return pcNoteLookup[i].key;
+    return -1;
+}
 
 // Fakes a midi piano keyboard using the PC keyboard
 bool CSong::pcKeyPress(int key, bool down)

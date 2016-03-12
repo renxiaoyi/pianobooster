@@ -100,11 +100,13 @@ void CGLView::paintGL()
     drawDisplayText();
     BENCHMARK(4, "drawDisplayText");
 
+    /*
     drawAccurracyBar();
     BENCHMARK(5, "drawAccurracyBar");
 
     drawBarNumber();
     BENCHMARK(6, "drawBarNumber");
+    */
 
     if (m_forcefullRedraw)
         m_score->drawScore();
@@ -221,6 +223,7 @@ void CGLView::drawDisplayText()
 
     glColor3f(1.0,1.0,1.0);
 
+    /*
     if (m_song->getPlayMode() != PB_PLAY_MODE_listen)
         renderText(30, y-4,0 ,tr("Accuracy:"), m_timeRatingFont);
 
@@ -230,6 +233,8 @@ void CGLView::drawDisplayText()
     y = Cfg::getAppHeight() - m_titleHeight;
 
     renderText(30, y+6, 0,tr("Song: ") + m_song->getSongTitle(), m_timeRatingFont);
+    */
+    
     /*
     char buffer[100];
     sprintf(buffer, "Notes %d wrong %d Late %d Score %4.1f%%",
@@ -266,7 +271,7 @@ void CGLView::resizeGL(int width, int height)
     int staveGap;
     int maxSoreHeight;
 
-    int space = height - (heightAboveStave + heightBelowStave + minTitleHeight + minStaveGap);
+    //int space = height - (heightAboveStave + heightBelowStave + minTitleHeight + minStaveGap);
     //m_titleHeight = qBound(minTitleHeight, minTitleHeight + space/2, 70);
     // staveGap = qBound(minStaveGap, minStaveGap+ space/2, static_cast<int>(CStavePos::staveHeight() * 3));
     if (height < 430)  // So it works on an eeepc 701 (for Trev)
