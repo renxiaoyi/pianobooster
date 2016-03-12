@@ -533,8 +533,7 @@ void QtWindow::help()
 
 
    "<p>You need a <b>MIDI Piano Keyboard </b> and a <b>MIDI interface</b> for the PC. If you "
-   "don't have a MIDI keyboard you can still try out PianoBooster using the PC keyboard, 'X' is "
-   "middle C.</p>"
+   "don't have a MIDI keyboard you can still try out PianoBooster using the PC keyboard.</p>"
 
    "<p>To hear the music you will need a <b>General Midi sound synthesizer</b>. "
    "The \"Microsoft GS Wavetable software synthesizer\" that comes with Windows can be used "
@@ -633,10 +632,10 @@ void QtWindow::keyboardShortcuts()
     msg += displayShortCut("ShortCuts/NextBook", tr("Change to the Next Book"));
     msg += displayShortCut("ShortCuts/PreviousBook", tr("Change to the Previous Book"));
 
-    msg += tr(
+    /*msg += tr(
                 "<tr><td>Fake Piano keys</td><td>X is middle C</td></tr>"
                 "</table> </center><br>"
-                );
+                );*/
     msgBox.setText(msg);
 
     msgBox.setMinimumWidth(600);

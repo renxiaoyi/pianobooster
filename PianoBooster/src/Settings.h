@@ -117,7 +117,7 @@ private:
     void saveBookSettings();
     void loadXmlFile();
     void saveXmlFile();
-    void setDefaultValue(const QString & key, const QVariant & value );
+    bool setDefaultValue(const QString & key, const QVariant & value, bool force = false );
 
 
     // returns either 'left' 'right' or 'both'

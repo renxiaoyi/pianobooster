@@ -35,8 +35,8 @@
 #include "Conductor.h"
 #include "TrackList.h"
 
-#define PC_KEY_LOWEST_NOTE    58
-#define PC_KEY_HIGHEST_NOTE    75
+#define PC_KEY_LOWEST_NOTE    37
+#define PC_KEY_HIGHEST_NOTE    84
 
 class CSong : public CConductor
 {

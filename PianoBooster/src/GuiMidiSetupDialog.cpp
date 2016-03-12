@@ -89,7 +89,7 @@ void GuiMidiSetupDialog::updateMidiInfoText()
     midiInfoText->clear();
 
     if (midiInputCombo->currentIndex() == 0)
-        midiInfoText->append("<span style=\"color:black\">" + tr("If you don't have a MIDI keyboard you can use the PC keyboard; 'X' is middle C.</span>"));
+        midiInfoText->append("<span style=\"color:black\">" + tr("If you don't have a MIDI keyboard you can use the PC keyboard.</span>"));
     else if (midiInputCombo->currentText().contains("Midi Through", Qt::CaseInsensitive))
         midiInfoText->append("<span style=\"color:#FF6600\">The use of Midi Through is not recommended!</span>");
     else

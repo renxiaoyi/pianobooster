@@ -221,11 +221,14 @@ exitTask:
     return eventBits;
 }
 
-static const struct pcNote_s
+struct pcNote_s
 {
     int key;
     int note;
-} pcNoteLookup[] =
+};
+
+/*
+static const pcNote_s pcNoteLookup[] =
 {
     { 'a', PC_KEY_LOWEST_NOTE },
     { 'z', 59 }, // B
@@ -245,6 +248,64 @@ static const struct pcNote_s
     { ';', 73 },
     { '/', 74 }, // D
     { '\'', PC_KEY_HIGHEST_NOTE },
+};  // default settings, not used
+*/
+
+static const pcNote_s pcNoteLookup[] =
+{
+    { '`', PC_KEY_LOWEST_NOTE },
+
+    { 'z', 38 }, // D
+    { 'x', 39 },
+    { 'c', 40 }, // E
+    { 'a', 41 }, // F
+    { 's', 42 },
+    { 'd', 43 }, // G
+    { 'f', 44 },
+    { 'g', 45 }, // A
+    { 'h', 46 },
+    { 'j', 47 }, // B
+    
+    { 'q', 48 }, // C
+    { 'w', 49 },
+    { 'e', 50 }, // D
+    { 'r', 51 },
+    { 't', 52 }, // E
+    { '1', 53 }, // F
+    { '2', 54 },
+    { '3', 55 }, // G
+    { '4', 56 },
+    { '5', 57 }, // A
+    { '6', 58 },
+    { '7', 59 }, // B
+
+    { '8', 60 }, // Middle C
+    { '9', 61 },
+    { '0', 62 }, // D
+    { '-', 63 },
+    { '=', 64 }, // E
+    { 'y', 65 }, // F
+    { 'u', 66 },
+    { 'i', 67 }, // G
+    { 'o', 68 },
+    { 'p', 69 }, // A
+    { '[', 70 },
+    { ']', 71 }, // B
+
+    { 'k', 72 }, // C
+    { 'l', 73 },
+    { ';', 74 }, // D
+    { '\'', 75 },
+    { '\\', 76 }, // E
+    { 'v', 77 }, // F
+    { 'b', 78 },
+    { 'n', 79 }, // G
+    { 'm', 80 },
+    { ',', 81 }, // A
+    { '.', 82 },
+    { '/', 83 }, // B
+    
+    { '~', PC_KEY_HIGHEST_NOTE },
 };
 
 // Fakes a midi piano keyboard using the PC keyboard
@@ -256,7 +317,7 @@ bool CSong::pcKeyPress(int key, bool down)
     const int cfg_pcKeyVolume = 64;
     const int cfg_pcKeyChannel = 1-1;
 
-    if (key == 't') // the tab key on the PC fakes good notes
+    if (key == '\t') // the tab key on the PC fakes good notes
     {
 
         if (down)

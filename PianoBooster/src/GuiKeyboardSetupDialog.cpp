@@ -100,7 +100,7 @@ void GuiKeyboardSetupDialog::updateInfoText()
     int noteRange = highestNote - lowestNote;
     keyboardInfoText->append("<span style=\"color:black\">" + tr("Choose the right and wrong sound for your playing.") + "</span>");
     if (!lowestNoteEdit->isEnabled())
-        str = "<span style=\"color:black\">" + tr("You can use the PC keyboard instead of a MIDI keyboard; 'x' is middle C.") + "</span>";
+        str = "<span style=\"color:black\">" + tr("You can use the PC keyboard instead of a MIDI keyboard.") + "</span>";
     else if (noteRange > 0)
         str = "<span style=\"color:black\">" + QString(tr("Your keyboard range is <b>octaves %1</b> and <b>semitones %2</b>; 60 is middle C.")).arg(noteRange/MIDI_OCTAVE).arg(noteRange%MIDI_OCTAVE) + "</span>";
     else

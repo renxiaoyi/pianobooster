@@ -70,12 +70,18 @@ CSettings::CSettings(QtWindow *mainWindow) : QSettings(CSettings::IniFormat, CSe
     CNotation::setCourtesyAccidentals(value("Score/CourtesyAccidentals", false ).toBool());
 }
 
-void CSettings::setDefaultValue(const QString & key, const QVariant & value )
+bool CSettings::setDefaultValue(const QString & key, const QVariant & value, bool force )
 {
-    if (contains(key)) // Do not change the value if it already set
-        return;
+    if (contains(key))
+    {
+        if (force)
+            remove(key);
+        else // Do not change the value if it already set
+            return false;
+    }
 
     setValue(key, value);
+    return true;
 }
 
 
@@ -378,27 +384,27 @@ void CSettings::writeSettings()
 
 void CSettings::loadSettings()
 {
-    unzipBootserMusicBooks();
+    //unzipBootserMusicBooks();
     // Set default values
     setValue("PianoBooster/Version", PB_VERSION);
-    setDefaultValue("ShortCuts/LeftHand", "F2");
-    setDefaultValue("ShortCuts/BothHands","F3");
-    setDefaultValue("ShortCuts/RightHand","F4");
-    setDefaultValue("ShortCuts/PlayFromStart",tr("space"));
-    setDefaultValue("ShortCuts/PlayPause","P");
-    setDefaultValue("ShortCuts/Faster","=");
-    setDefaultValue("ShortCuts/Slower","-");
-    setDefaultValue("ShortCuts/NextSong","]");
-    setDefaultValue("ShortCuts/PreviousSong","[");
-    setDefaultValue("ShortCuts/NextBook","{");
-    setDefaultValue("ShortCuts/PreviousBook","}");
+    setDefaultValue("ShortCuts/LeftHand", "Ctrl+l", true);
+    setDefaultValue("ShortCuts/BothHands", "Ctrl+b", true);
+    setDefaultValue("ShortCuts/RightHand", "Ctrl+r", true);
+    setDefaultValue("ShortCuts/PlayFromStart", tr("space"));
+    setDefaultValue("ShortCuts/PlayPause", "Ctrl+=", true);
+    setDefaultValue("ShortCuts/Faster", "Ctrl+0", true);
+    setDefaultValue("ShortCuts/Slower", "Ctrl+9", true);
+    setDefaultValue("ShortCuts/NextSong", "Ctrl+]", true);
+    setDefaultValue("ShortCuts/PreviousSong", "Ctrl+[", true);
+    setDefaultValue("ShortCuts/NextBook", "Ctrl+{", true);
+    setDefaultValue("ShortCuts/PreviousBook", "Ctrl+}", true);
+    
     QString songName = value("CurrentSong").toString();
     if (!songName.isEmpty())
         openSongFile( songName );
 
     updateWarningMessages();
     updateTutorPage();
-
 }
 
 void CSettings::unzipBootserMusicBooks()
