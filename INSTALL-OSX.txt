@@ -1,0 +1,6 @@
+1. brew install qt5
+2. brew info qt5  # prints qt5 path, which is used in step 5
+3. change RUNTIME DESTINATION to BUNDLE DESTINATION at line 225 in PianoBooster/src/CMakeLists.txt (no need to repeat)
+4. mkdir BuildMac && cd BuildMac
+5. cmake -G Xcode ../PianoBooster/src -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.5.1_2
+6. open pianobooster.xcodeproj by XCode and build
