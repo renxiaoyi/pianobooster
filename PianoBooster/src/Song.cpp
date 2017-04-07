@@ -69,7 +69,6 @@ void CSong::loadSong(const QString & filename)
     setEventBits(EVENT_BITS_playingStopped);
     if (!m_midiFile->getSongTitle().isEmpty())
         m_songTitle = m_midiFile->getSongTitle();
-
 }
 
 
@@ -88,9 +87,7 @@ void CSong::midiFileInfo()
         m_trackList->examineMidiEvent(event);
 
         if (event.type() == MIDI_PB_timeSignature)
-        {
             setTimeSig(event.data1(),event.data2());
-        }
 
         if (event.type() == MIDI_PB_EOF)
             break;
@@ -164,8 +161,6 @@ void CSong::refreshScroll()
 eventBits_t CSong::task(int ticks)
 {
     realTimeEngine(ticks);
-
-
     while (true)
     {
         if (m_reachedMidiEof == true)
@@ -265,7 +260,7 @@ static const pcNote_s pcNoteLookup[] =
     { 'g', 45 }, // A
     { 'h', 46 },
     { 'j', 47 }, // B
-    
+
     { 'q', 48 }, // C
     { 'w', 49 },
     { 'e', 50 }, // D
@@ -304,7 +299,7 @@ static const pcNote_s pcNoteLookup[] =
     { ',', 81 }, // A
     { '.', 82 },
     { '/', 83 }, // B
-    
+
     { '~', PC_KEY_HIGHEST_NOTE },
 };
 
@@ -343,7 +338,7 @@ bool CSong::pcKeyPress(int key, bool down)
 
     for (j = 0; j < arraySize(pcNoteLookup); j++)
     {
-        if ( key==pcNoteLookup[j].key)
+        if ( key == pcNoteLookup[j].key)
         {
             if (down)
                 midi.noteOnEvent(0, cfg_pcKeyChannel, pcNoteLookup[j].note, cfg_pcKeyVolume);
@@ -357,4 +352,3 @@ bool CSong::pcKeyPress(int key, bool down)
     //printf("pcKeyPress %d %d\n", m_pcNote, key);
     return false;
 }
-

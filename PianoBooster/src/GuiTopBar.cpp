@@ -62,6 +62,8 @@ void GuiTopBar::init(CSong* songObj, CTrackList* trackList)
 {
     m_song = songObj;
     reloadKeyCombo(true);
+    reloadRangeCombo();
+    refresh(false);
 }
 
 void GuiTopBar::refresh(bool reset)
@@ -70,6 +72,7 @@ void GuiTopBar::refresh(bool reset)
     {
         majorCombo->setCurrentIndex(0);
         reloadKeyCombo(true);
+        reloadRangeCombo();
         transposeSpin->setValue(0);
         startBarSpin->setValue(0);
     }
@@ -116,7 +119,20 @@ void GuiTopBar::reloadKeyCombo(bool major)
         keyCombo->addItem(tr("C#"));
         keyCombo->addItem(tr("D#"));
     }
-    refresh(false);
+}
+
+void GuiTopBar::reloadRangeCombo()
+{
+    rangeCombo->clear();
+    rangeCombo->addItem(tr("C2"));
+    rangeCombo->addItem(tr("C1"));
+    rangeCombo->addItem(tr("C"));
+    rangeCombo->addItem(tr("c"));
+    rangeCombo->addItem(tr("c1"));
+    rangeCombo->addItem(tr("c2"));
+    rangeCombo->addItem(tr("c3"));
+    rangeCombo->addItem(tr("c4"));
+    rangeCombo->addItem(tr("c5"));
 }
 
 void GuiTopBar::on_keyCombo_activated(int index)
@@ -209,7 +225,7 @@ void GuiTopBar::on_startBarSpin_valueChanged(double bar)
 {
     if (!m_song) return;
 
-    // Stop the muisc playing
+    // Stop the music playing
     m_song->playMusic(false);
     setPlayButtonState(false);
 

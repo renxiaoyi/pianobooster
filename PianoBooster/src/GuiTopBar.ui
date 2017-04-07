@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>839</width>
+    <width>1031</width>
     <height>34</height>
    </rect>
   </property>
@@ -116,7 +116,25 @@
       <widget class="QComboBox" name="keyCombo"/>
      </item>
      <item>
-      <widget class="QComboBox" name="majorCombo"/>
+      <widget class="QComboBox" name="majorCombo">
+       <property name="cursor">
+        <cursorShape>ArrowCursor</cursorShape>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Range:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="rangeCombo">
+       <property name="cursor">
+        <cursorShape>ArrowCursor</cursorShape>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label">

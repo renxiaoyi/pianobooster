@@ -76,6 +76,7 @@ private slots:
 private:
     bool eventFilter(QObject *obj, QEvent *event);
     void reloadKeyCombo(bool major);
+    void reloadRangeCombo();
 
     CSong* m_song;
     CSettings* m_settings;
