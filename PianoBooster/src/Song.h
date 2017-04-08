@@ -37,9 +37,8 @@
 #include "Conductor.h"
 #include "TrackList.h"
 
-// TODO: make (lowest, highest) dynamic.
-#define PC_KEY_LOWEST_NOTE    37
-#define PC_KEY_HIGHEST_NOTE    84
+#define PC_KEY_LOWEST_NOTE      21
+#define PC_KEY_HIGHEST_NOTE    110
 
 struct pcNote_s
 {
@@ -146,7 +145,7 @@ public:
     void refreshPCNoteRange(int delta)
     {
         for (size_t i = 0; i < m_pcNoteLookup.size(); i++)
-          m_pcNoteLookup[i].note += 12*delta;
+          m_pcNoteLookup[i].note = pcNoteLookup[i].note + 12*delta;
     }
 
 private:

@@ -124,7 +124,6 @@ void GuiTopBar::reloadKeyCombo(bool major)
 void GuiTopBar::reloadRangeCombo()
 {
     rangeCombo->clear();
-    rangeCombo->addItem(tr("C2"));
     rangeCombo->addItem(tr("C1"));
     rangeCombo->addItem(tr("C"));
     rangeCombo->addItem(tr("c"));
@@ -132,7 +131,6 @@ void GuiTopBar::reloadRangeCombo()
     rangeCombo->addItem(tr("c2"));
     rangeCombo->addItem(tr("c3"));
     rangeCombo->addItem(tr("c4"));
-    rangeCombo->addItem(tr("c5"));
     rangeCombo->setCurrentText("c1");
 }
 
@@ -144,7 +142,7 @@ void GuiTopBar::on_keyCombo_activated(int index)
 
 void GuiTopBar::on_rangeCombo_activated(int index)
 {
-    m_song->refreshPCNoteRange(index - 4);
+    m_song->refreshPCNoteRange(index - 3);
 }
 
 void GuiTopBar::on_transposeSpin_valueChanged(int value)
