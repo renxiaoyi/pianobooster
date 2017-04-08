@@ -264,14 +264,6 @@ void CDraw::drawStaveNoteName(CSymbol symbol, float x, float y)
     y += CStavePos::getVerticalNoteSpacing()*2 +3;
     int note = symbol.getNote();
     drawNoteName(note, x, y, true);
-    
-    int key = CSong::midiNote2Key(note);
-    char buf[100];
-    if (key > 0)
-        sprintf(buf, "midi note [%d] => key [%c]", note, key);
-    else
-        sprintf(buf, "midi note [%d] => key [null]", note);
-    ppLogDebug(buf);
 }
 
 void CDraw::checkAccidental(CSymbol symbol, float x, float y)

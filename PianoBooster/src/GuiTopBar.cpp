@@ -133,12 +133,18 @@ void GuiTopBar::reloadRangeCombo()
     rangeCombo->addItem(tr("c3"));
     rangeCombo->addItem(tr("c4"));
     rangeCombo->addItem(tr("c5"));
+    rangeCombo->setCurrentText("c1");
 }
 
 void GuiTopBar::on_keyCombo_activated(int index)
 {
     CStavePos::setKeySignature(index - 6, 0);
     m_song->refreshScroll();
+}
+
+void GuiTopBar::on_rangeCombo_activated(int index)
+{
+    m_song->refreshPCNoteRange(index - 4);
 }
 
 void GuiTopBar::on_transposeSpin_valueChanged(int value)

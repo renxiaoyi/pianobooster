@@ -216,101 +216,6 @@ exitTask:
     return eventBits;
 }
 
-struct pcNote_s
-{
-    int key;
-    int note;
-};
-
-/*
-static const pcNote_s pcNoteLookup[] =
-{
-    { 'a', PC_KEY_LOWEST_NOTE },
-    { 'z', 59 }, // B
-    { 'x', 60 }, // Middle C
-    { 'd', 61 },
-    { 'c', 62 }, // D
-    { 'f', 63 },
-    { 'v', 64 }, // E
-    { 'b', 65 }, // F
-    { 'h', 66 },
-    { 'n', 67 }, // G
-    { 'j', 68 },
-    { 'm', 69 }, // A
-    { 'k', 70 },
-    { ',', 71 }, // B
-    { '.', 72 }, // C
-    { ';', 73 },
-    { '/', 74 }, // D
-    { '\'', PC_KEY_HIGHEST_NOTE },
-};  // default settings, not used
-*/
-
-static const pcNote_s pcNoteLookup[] =
-{
-    { '`', PC_KEY_LOWEST_NOTE },
-
-    { 'z', 38 }, // D
-    { 'x', 39 },
-    { 'c', 40 }, // E
-    { 'a', 41 }, // F
-    { 's', 42 },
-    { 'd', 43 }, // G
-    { 'f', 44 },
-    { 'g', 45 }, // A
-    { 'h', 46 },
-    { 'j', 47 }, // B
-
-    { 'q', 48 }, // C
-    { 'w', 49 },
-    { 'e', 50 }, // D
-    { 'r', 51 },
-    { 't', 52 }, // E
-    { '1', 53 }, // F
-    { '2', 54 },
-    { '3', 55 }, // G
-    { '4', 56 },
-    { '5', 57 }, // A
-    { '6', 58 },
-    { '7', 59 }, // B
-
-    { '8', 60 }, // Middle C
-    { '9', 61 },
-    { '0', 62 }, // D
-    { '-', 63 },
-    { '=', 64 }, // E
-    { 'y', 65 }, // F
-    { 'u', 66 },
-    { 'i', 67 }, // G
-    { 'o', 68 },
-    { 'p', 69 }, // A
-    { '[', 70 },
-    { ']', 71 }, // B
-
-    { 'k', 72 }, // C
-    { 'l', 73 },
-    { ';', 74 }, // D
-    { '\'', 75 },
-    { '\r', 76 }, // E
-    { 'v', 77 }, // F
-    { 'b', 78 },
-    { 'n', 79 }, // G
-    { 'm', 80 },
-    { ',', 81 }, // A
-    { '.', 82 },
-    { '/', 83 }, // B
-
-    { '~', PC_KEY_HIGHEST_NOTE },
-};
-
-int CSong::midiNote2Key(int note)
-{
-    for (size_t i = 0; i < arraySize(pcNoteLookup); i++)
-        if (note == pcNoteLookup[i].note)
-            return pcNoteLookup[i].key;
-    return -1;
-}
-
 // Fakes a midi piano keyboard using the PC keyboard
 bool CSong::pcKeyPress(int key, bool down)
 {
@@ -336,14 +241,14 @@ bool CSong::pcKeyPress(int key, bool down)
         return true;
     }
 
-    for (j = 0; j < arraySize(pcNoteLookup); j++)
+    for (j = 0; j < m_pcNoteLookup.size(); j++)
     {
-        if ( key == pcNoteLookup[j].key)
+        if ( key == m_pcNoteLookup[j].key)
         {
             if (down)
-                midi.noteOnEvent(0, cfg_pcKeyChannel, pcNoteLookup[j].note, cfg_pcKeyVolume);
+                midi.noteOnEvent(0, cfg_pcKeyChannel, m_pcNoteLookup[j].note, cfg_pcKeyVolume);
             else
-                midi.noteOffEvent(0, cfg_pcKeyChannel, pcNoteLookup[j].note, cfg_pcKeyVolume);
+                midi.noteOffEvent(0, cfg_pcKeyChannel, m_pcNoteLookup[j].note, cfg_pcKeyVolume);
 
             expandPianistInput(midi);
             return true;
