@@ -50,8 +50,11 @@ public:
 
     void setPlayButtonState(bool checked, bool atTheEnd = false);
 
-    void setSpeed(int value){ speedSpin->setValue(value); }
-    int getSpeed(){return speedSpin->value();}
+    void setSpeed(int value) { speedSpin->setValue(value); }
+    int getSpeed() { return speedSpin->value(); }
+
+    void setRange(int index) { rangeCombo->setCurrentIndex(index); }
+    int getRange() { return rangeCombo->currentIndex(); }
 
 public slots:
     void on_playFromStartButton_clicked(bool clicked);

@@ -149,6 +149,18 @@ private slots:
         speed = m_song->getSpeed();
         m_topBar->setSpeed(static_cast<int>(speed*100 + 0.5));
     }
+    void on_higher()   {
+        int index = m_topBar->getRange();
+        index += 1;
+        m_topBar->setRange(index);
+        m_song->refreshPCNoteRange(index - 3);
+    }
+    void on_lower()   {
+        int index = m_topBar->getRange();
+        index -= 1;
+        m_topBar->setRange(index);
+        m_song->refreshPCNoteRange(index - 3);
+    }
     void on_nextSong()   {  m_sidePanel->nextSong(+1); }
     void on_previousSong()   {  m_sidePanel->nextSong(-1); }
     void on_nextBook()   {  m_sidePanel->nextBook(+1); }

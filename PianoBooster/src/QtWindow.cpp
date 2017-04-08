@@ -348,7 +348,7 @@ void QtWindow::createActions()
     m_openAct->setStatusTip(tr("Open an existing file"));
     connect(m_openAct, SIGNAL(triggered()), this, SLOT(open()));
 
-    m_exitAct = new QAction(tr("E&xit"), this);
+    m_exitAct = new QAction(tr("&Exit"), this);
     m_exitAct->setShortcut(tr("Ctrl+Q"));
     m_exitAct->setStatusTip(tr("Exit the application"));
     connect(m_exitAct, SIGNAL(triggered()), this, SLOT(close()));
@@ -366,7 +366,7 @@ void QtWindow::createActions()
     m_setupMidiAct->setStatusTip(tr("Setup the Midi input an output"));
     connect(m_setupMidiAct, SIGNAL(triggered()), this, SLOT(showMidiSetup()));
 
-    m_setupKeyboardAct = new QAction(tr("Piano &Keyboard Setting ..."), this);
+    m_setupKeyboardAct = new QAction(tr("&Piano Keyboard Setting ..."), this);
     m_setupKeyboardAct->setShortcut(tr("Ctrl+K"));
     m_setupKeyboardAct->setStatusTip(tr("Change the piano keyboard settings"));
     connect(m_setupKeyboardAct, SIGNAL(triggered()), this, SLOT(showKeyboardSetup()));
@@ -408,6 +408,8 @@ void QtWindow::createActions()
     addShortcutAction("ShortCuts/PlayPause",        SLOT(on_playPause()));
     addShortcutAction("ShortCuts/Faster",           SLOT(on_faster()));
     addShortcutAction("ShortCuts/Slower",           SLOT(on_slower()));
+    addShortcutAction("ShortCuts/Higher",           SLOT(on_higher()));
+    addShortcutAction("ShortCuts/Lower",            SLOT(on_lower()));
     addShortcutAction("ShortCuts/NextSong",         SLOT(on_nextSong()));
     addShortcutAction("ShortCuts/PreviousSong",     SLOT(on_previousSong()));
     addShortcutAction("ShortCuts/NextBook",         SLOT(on_nextBook()));
@@ -625,8 +627,10 @@ void QtWindow::keyboardShortcuts()
     msg += displayShortCut("ShortCuts/LeftHand", tr("Choose the left Hand"));
     msg += displayShortCut("ShortCuts/PlayFromStart", tr("Play from start toggle"));
     msg += displayShortCut("ShortCuts/PlayPause", tr("Play Pause Toggle"));
-    msg += displayShortCut("ShortCuts/Faster",  tr("Increase the speed by 5%"));
-    msg += displayShortCut("ShortCuts/Slower", tr("Increase the speed by 5%"));
+    msg += displayShortCut("ShortCuts/Faster", tr("Increase the speed by 5%"));
+    msg += displayShortCut("ShortCuts/Slower", tr("Decrease the speed by 5%"));
+    msg += displayShortCut("ShortCuts/Higher", tr("Increase the PC note range by one octave"));
+    msg += displayShortCut("ShortCuts/Lower", tr("Decrease the PC note range by one octave"));
     msg += displayShortCut("ShortCuts/NextSong", tr("Change to the Next Song"));
     msg += displayShortCut("ShortCuts/PreviousSong", tr("Change to the Previous Song"));
     msg += displayShortCut("ShortCuts/NextBook", tr("Change to the Next Book"));
@@ -731,4 +735,3 @@ void QtWindow::loadTutorHtml(const QString & name)
     }
 
 }
-

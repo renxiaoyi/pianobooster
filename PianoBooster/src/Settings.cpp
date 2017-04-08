@@ -394,11 +394,13 @@ void CSettings::loadSettings()
     setDefaultValue("ShortCuts/PlayPause", "Ctrl+=", true);
     setDefaultValue("ShortCuts/Faster", "Ctrl+0", true);
     setDefaultValue("ShortCuts/Slower", "Ctrl+9", true);
+    setDefaultValue("ShortCuts/Higher", "F2", true);
+    setDefaultValue("ShortCuts/Lower", "F1", true);
     setDefaultValue("ShortCuts/NextSong", "Ctrl+]", true);
     setDefaultValue("ShortCuts/PreviousSong", "Ctrl+[", true);
     setDefaultValue("ShortCuts/NextBook", "Ctrl+{", true);
     setDefaultValue("ShortCuts/PreviousBook", "Ctrl+}", true);
-    
+
     QString songName = value("CurrentSong").toString();
     if (!songName.isEmpty())
         openSongFile( songName );
@@ -441,9 +443,9 @@ void CSettings::unzipBootserMusicBooks()
 
         QFileInfo zipFile(resourceDir +  ZIPFILENAME);
         ppLogTrace("xx %s", qPrintable(zipFile.filePath()));
-        
+
 		QDir destMusicDir;
-		
+
 #ifdef _WIN32
         const QString MUSIC_DIR_NAME("My Music");
 		QSettings settings(QSettings::UserScope, "Microsoft", "Windows");
@@ -453,7 +455,7 @@ void CSettings::unzipBootserMusicBooks()
         const QString MUSIC_DIR_NAME("Music");
 		destMusicDir.setPath(QDir::homePath() );
 #endif
-         
+
         if (!QDir(destMusicDir.absolutePath() + "/" + MUSIC_DIR_NAME).exists())
         {
             destMusicDir.mkdir(MUSIC_DIR_NAME);
@@ -490,7 +492,7 @@ void CSettings::unzipBootserMusicBooks()
              ppLogError("unzip failed");
              return;
         }
-#endif       
+#endif
 		QString fileName(destMusicDir.absolutePath() + "/BoosterMusicBooks" + QString::number(MUSIC_RELEASE) + "/Booster Music/01-ClairDeLaLune.mid");
 		openSongFile(fileName);
 		m_mainWindow->setCurrentFile(fileName);
@@ -547,4 +549,3 @@ void CSettings::updateWarningMessages()
     else
         m_warningMessage.clear();
 }
-
