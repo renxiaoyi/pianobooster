@@ -164,7 +164,6 @@ QtWindow::QtWindow()
 
 void QtWindow::init()
 {
-
     m_settings->loadSettings();
 
     createActions();
@@ -698,9 +697,6 @@ void QtWindow::keyPressEvent ( QKeyEvent * event )
         return;
 
     if (event->isAutoRepeat() == true)
-        return;
-
-    if (event->key() == Qt::Key_F1)
         return;
 
     int c = event->text().toLatin1().at(0);

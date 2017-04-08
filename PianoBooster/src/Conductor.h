@@ -97,7 +97,7 @@ public:
 
     void rewind();
 
-    //! rest the conductor between each song
+    //! reset the conductor between each song
     void reset();
 
     void realTimeEngine(int mSecTicks);
@@ -158,7 +158,6 @@ public:
 
     CChord getWantedChord() {return m_wantedChord;}
     void setActiveHand(whichPart_t hand);
-
     void setActiveChannel(int channel);
     int getActiveChannel(){return m_activeChannel;}
     void setPianistChannels(int goodChan, int badChan){
@@ -171,7 +170,6 @@ public:
 
     // You MUST clear the time sig to 0 first before setting an new start time Sig
     void setTimeSig(int top, int bottom) { m_bar.setTimeSig(top, bottom);}
-
     void getTimeSig(int *top, int *bottom) {m_bar.getTimeSig(top, bottom);}
     void testWrongNoteSound(bool enable);
 

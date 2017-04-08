@@ -40,7 +40,7 @@ void CSong::init2(CScore * scoreWin, CSettings* settings)
     setActiveHand(PB_PART_both);
     setPlayMode(PB_PLAY_MODE_followYou);
     setSpeed(1.0);
-    setSkill(3);
+    setSkill(0);
 }
 
 void CSong::loadSong(const QString & filename)
@@ -203,7 +203,8 @@ eventBits_t CSong::task(int ticks)
         if (seekingBarNumber() && m_reachedMidiEof == false && playingMusic())
         {
             realTimeEngine(0);
-            m_scoreWin->drawScrollingSymbols(false); // don't display any thing just  remove from the queue
+            // don't display any thing just removed from the queue
+            m_scoreWin->drawScrollingSymbols(false);
         }
         else
             break;
@@ -222,20 +223,20 @@ bool CSong::pcKeyPress(int key, bool down)
     int i;
     size_t j;
     CMidiEvent midi;
-    const int cfg_pcKeyVolume = 64;
+    const int cfg_pcKeyVolume = 128;
     const int cfg_pcKeyChannel = 1-1;
 
-    if (key == '\t') // the tab key on the PC fakes good notes
+    if (key == '\t') // fakes good notes
     {
-
+        CChord fakeChord;
         if (down)
-            m_fakeChord = getWantedChord();
-        for (i = 0; i < m_fakeChord.length(); i++)
+            fakeChord = getWantedChord();
+        for (i = 0; i < fakeChord.length(); i++)
         {
             if (down)
-                midi.noteOnEvent(0, cfg_pcKeyChannel, m_fakeChord.getNote(i).pitch() + getTranspose(), cfg_pcKeyVolume);
+                midi.noteOnEvent(0, cfg_pcKeyChannel, fakeChord.getNote(i).pitch() + getTranspose(), cfg_pcKeyVolume);
             else
-                midi.noteOffEvent(0, cfg_pcKeyChannel, m_fakeChord.getNote(i).pitch() + getTranspose(), cfg_pcKeyVolume);
+                midi.noteOffEvent(0, cfg_pcKeyChannel, fakeChord.getNote(i).pitch() + getTranspose(), cfg_pcKeyVolume);
             expandPianistInput(midi);
         }
         return true;
@@ -243,7 +244,7 @@ bool CSong::pcKeyPress(int key, bool down)
 
     for (j = 0; j < m_pcNoteLookup.size(); j++)
     {
-        if ( key == m_pcNoteLookup[j].key)
+        if (key == m_pcNoteLookup[j].key)
         {
             if (down)
                 midi.noteOnEvent(0, cfg_pcKeyChannel, m_pcNoteLookup[j].note, cfg_pcKeyVolume);

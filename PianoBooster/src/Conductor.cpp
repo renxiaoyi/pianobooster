@@ -120,9 +120,7 @@ int CConductor::midiEventSpace()
 void CConductor::channelSoundOff(int channel)
 {
     if (channel < 0 || channel >= MAX_MIDI_CHANNELS)
-    {
         return;
-    }
 
     CMidiEvent midi;
     midi.controlChangeEvent(0, channel, MIDI_ALL_NOTES_OFF, 0);
@@ -525,7 +523,7 @@ void CConductor::findSplitPoint()
             highestBase = note.pitch();
     }
 
-    //put the split point in the middle
+    // put the split point in the middle
     m_pianistSplitPoint = ((lowestTreble + highestBase) /2 ) + m_transpose;
 }
 
@@ -546,7 +544,7 @@ void CConductor::turnOnKeyboardLights(bool on)
             event.noteOnEvent(0, Cfg::keyboardLightsChan, note, 1);
         else
             event.noteOffEvent(0, Cfg::keyboardLightsChan, note, 1);
-       playMidiEvent( event ); // don't use the track  settings
+       playMidiEvent( event ); // don't use the track settings
     }
 }
 
@@ -690,7 +688,6 @@ void CConductor::pianistInput(CMidiEvent inputNote)
 
     // inputNote.transpose(+12); fixme
 
-
     if (m_testWrongNoteSound)
         goodSound = false;
 
@@ -701,10 +698,8 @@ void CConductor::pianistInput(CMidiEvent inputNote)
     if ( inputNote.channel() == MIDI_DRUM_CHANNEL)
         hand = (inputNote.note() >= MIDDLE_C) ? PB_PART_right : PB_PART_left;
 
-
     if (inputNote.type() == MIDI_NOTE_ON)
     {
-
         if ( validatePianistNote(inputNote) == true)
         {
             m_goodPlayedNotes.addNote(hand, inputNote.note());
@@ -717,12 +712,10 @@ void CConductor::pianistInput(CMidiEvent inputNote)
             m_scoreWin->setPlayedNoteColour(inputNote.note(),
                         (!m_followPlayingTimeOut)? Cfg::playedGoodColour():Cfg::playedBadColour(),
                         m_chordDeltaTime, pianistTiming);
-
             if (validatePianistChord() == true)
             {
                 if (m_chordDeltaTime < 0)
                     m_tempo.removePlayingTicks(-m_chordDeltaTime);
-
                 m_goodPlayedNotes.clear();
                 fetchNextChord();
                 // count the good notes so that the live percentage looks OK
@@ -741,7 +734,6 @@ void CConductor::pianistInput(CMidiEvent inputNote)
             if (m_playing == true)
             {
                 goodSound = false;
-
                 m_piano->addPianistNote(hand, inputNote, false);
                 m_rating.wrongNotes(1);
             }
@@ -808,28 +800,24 @@ void CConductor::pianistInput(CMidiEvent inputNote)
         playTrackEvent( inputNote );
     }
 
-
     /*
     // use the same channel for the right and wrong note
     int pianoSound = (goodSound == true) ? m_cfg_rightNoteSound : m_cfg_wrongNoteSound;
-
     if (pianoSound != m_lastSound)
     {
         m_lastSound = pianoSound;
-
         CMidiEvent midiSound;
         midiSound.programChangeEvent(0,inputNote.channel(),pianoSound);
         playTrackEvent( midiSound );
     }
     */
-
 }
 
 void CConductor::addDeltaTime(int ticks)
 {
     m_scoreWin->scrollDeltaTime(ticks);
     m_playingDeltaTime += ticks;
-    m_chordDeltaTime +=ticks;
+    m_chordDeltaTime += ticks;
 }
 
 void CConductor::followPlaying()
@@ -937,16 +925,12 @@ void CConductor::realTimeEngine(int mSecTicks)
                 m_silenceTimeOut = 0;
             }
         }
-
         m_tempo.insertPlayingTicks(ticks);
-
-
         if (m_pianistTiming > m_cfg_playZoneLate)
         {
             if (m_followPlayingTimeOut == false)
             {
                 m_followPlayingTimeOut = true;
-
                 m_tempo.clearPlayingTicks();
                 m_rating.lateNotes(m_wantedChord.length() - m_goodPlayedNotes.length());
                 setEventBits( EVENT_BITS_forceRatingRedraw);
@@ -1117,7 +1101,6 @@ void CConductor::init2(CScore * scoreWin, CSettings* settings)
         m_scoreWin->setRatingObject(&m_rating);
         m_piano = m_scoreWin->getPianoObject();
     }
-
 
     rewind();
 }

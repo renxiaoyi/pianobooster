@@ -170,6 +170,7 @@ protected:
     void closeEvent(QCloseEvent *event);
     void keyPressEvent ( QKeyEvent * event );
     void keyReleaseEvent ( QKeyEvent * event );
+    bool focusNextPrevChild(bool next) { return false; }  // so that tab key event can be caught
 
 private:
     void decodeCommandLine();

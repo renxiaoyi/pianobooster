@@ -154,7 +154,6 @@ private:
     CMidiFile* m_midiFile;
     CFindChord m_findChord;
     bool m_reachedMidiEof;
-    CChord m_fakeChord;  // the chord played with the tab key
     CTrackList* m_trackList;
     QString m_songTitle;
     std::vector<pcNote_s> m_pcNoteLookup;
